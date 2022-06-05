@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bb1e8194b6d84536b805a0d8921c1705" Name="Diagram1" >
+        <EntityTypeShape EntityType="AracKiralama1.Musteriler" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="AracKiralama1.Odemeler" Width="1.5" PointX="2.5" PointY="0.5" />
+        <EntityTypeShape EntityType="AracKiralama1.Araclar" Width="1.5" PointX="4.5" PointY="0.5" />
+        <AssociationConnector Association="AracKiralama1.MusterilerOdemeler" />
+        <AssociationConnector Association="AracKiralama1.AraclarOdemeler" />
+        <EntityTypeShape EntityType="AracKiralama1.Bayiler" Width="1.5" PointX="6.5" PointY="0.5" />
+        <AssociationConnector Association="AracKiralama1.AraclarBayiler" />
+        <EntityTypeShape EntityType="AracKiralama1.Users" Width="1.5" PointX="9.125" PointY="1.375" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

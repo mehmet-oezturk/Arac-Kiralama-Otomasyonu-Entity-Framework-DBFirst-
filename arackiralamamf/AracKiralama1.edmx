@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AracKiralama1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="AracKiralama1StoreContainer">
+    <EntitySet Name="Musteriler1" EntityType="AracKiralama1.Store.Musteriler1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Odemeler1" EntityType="AracKiralama1.Store.Odemeler1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Araclar1" EntityType="AracKiralama1.Store.Araclar1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Bayiler1" EntityType="AracKiralama1.Store.Bayiler1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users1" EntityType="AracKiralama1.Store.Users1" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="MusterilerOdemeler" Association="AracKiralama1.Store.MusterilerOdemeler">
+      <End Role="Musteriler" EntitySet="Musteriler1" />
+      <End Role="Odemeler" EntitySet="Odemeler1" />
+    </AssociationSet>
+    <AssociationSet Name="AraclarOdemeler" Association="AracKiralama1.Store.AraclarOdemeler">
+      <End Role="Araclar" EntitySet="Araclar1" />
+      <End Role="Odemeler" EntitySet="Odemeler1" />
+    </AssociationSet>
+    <AssociationSet Name="AraclarBayiler" Association="AracKiralama1.Store.AraclarBayiler">
+      <End Role="Araclar" EntitySet="Araclar1" />
+      <End Role="Bayiler" EntitySet="Bayiler1" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Musteriler1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MusteriAdSoyad" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Telefon" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TcNo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="EhliyetDurumu" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Adres" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Odemeler1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MusterilerId" Type="int" Nullable="false" />
+    <Property Name="AraclarId" Type="int" Nullable="false" />
+    <Property Name="OdemeTutar" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="OdemeTarih" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="VadeFarki" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Araclar1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AracMarka" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AracModel" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AracOzellik" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AracBakımGunu" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AracKm" Type="int" Nullable="false" />
+    <Property Name="Hgs" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="GunlukTutar" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="AracKiraDurumu" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Bayiler1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AraclarId" Type="int" Nullable="false" />
+    <Property Name="BayiAd" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BayiYetkilisi" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BayiAdres" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BayiTelefon" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="BayiCiro" Type="decimal" Nullable="false" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Users1">
+    <Key>
+      <PropertyRef Name="userID" />
+    </Key>
+    <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="UserPs" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <Association Name="MusterilerOdemeler">
+    <End Role="Musteriler" Type="AracKiralama1.Store.Musteriler1" Multiplicity="1" />
+    <End Role="Odemeler" Type="AracKiralama1.Store.Odemeler1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Musteriler">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Odemeler">
+        <PropertyRef Name="MusterilerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AraclarOdemeler">
+    <End Role="Araclar" Type="AracKiralama1.Store.Araclar1" Multiplicity="1" />
+    <End Role="Odemeler" Type="AracKiralama1.Store.Odemeler1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Araclar">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Odemeler">
+        <PropertyRef Name="AraclarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AraclarBayiler">
+    <End Role="Araclar" Type="AracKiralama1.Store.Araclar1" Multiplicity="1" />
+    <End Role="Bayiler" Type="AracKiralama1.Store.Bayiler1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Araclar">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Bayiler">
+        <PropertyRef Name="AraclarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="AracKiralama1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="AracKiralama1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Musteriler1" EntityType="AracKiralama1.Musteriler" />
+          <EntitySet Name="Odemeler1" EntityType="AracKiralama1.Odemeler" />
+          <EntitySet Name="Araclar1" EntityType="AracKiralama1.Araclar" />
+          <AssociationSet Name="MusterilerOdemeler" Association="AracKiralama1.MusterilerOdemeler">
+            <End Role="Musteriler" EntitySet="Musteriler1" />
+            <End Role="Odemeler" EntitySet="Odemeler1" />
+          </AssociationSet>
+          <AssociationSet Name="AraclarOdemeler" Association="AracKiralama1.AraclarOdemeler">
+            <End Role="Araclar" EntitySet="Araclar1" />
+            <End Role="Odemeler" EntitySet="Odemeler1" />
+          </AssociationSet>
+          <EntitySet Name="Bayiler1" EntityType="AracKiralama1.Bayiler" />
+          <AssociationSet Name="AraclarBayiler" Association="AracKiralama1.AraclarBayiler">
+            <End Role="Araclar" EntitySet="Araclar1" />
+            <End Role="Bayiler" EntitySet="Bayiler1" />
+          </AssociationSet>
+          <EntitySet Name="Users1" EntityType="AracKiralama1.Users" />
+        </EntityContainer>
+        <EntityType Name="Musteriler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MusteriAdSoyad" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Telefon" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="TcNo" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="EhliyetDurumu" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Adres" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Odemeler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MusterilerId" Type="Int32" Nullable="false" />
+          <Property Name="AraclarId" Type="Int32" Nullable="false" />
+          <Property Name="OdemeTutar" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="OdemeTarih" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="VadeFarki" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Araclar">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AracMarka" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="AracModel" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="AracOzellik" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="AracBakımGunu" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="AracKm" Type="Int32" Nullable="false" />
+          <Property Name="Hgs" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="GunlukTutar" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="AracKiraDurumu" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <Association Name="MusterilerOdemeler">
+          <End Type="AracKiralama1.Musteriler" Role="Musteriler" Multiplicity="1" />
+          <End Type="AracKiralama1.Odemeler" Role="Odemeler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Musteriler">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Odemeler">
+              <PropertyRef Name="MusterilerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AraclarOdemeler">
+          <End Type="AracKiralama1.Araclar" Role="Araclar" Multiplicity="1" />
+          <End Type="AracKiralama1.Odemeler" Role="Odemeler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Araclar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Odemeler">
+              <PropertyRef Name="AraclarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Bayiler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AraclarId" Type="Int32" Nullable="false" />
+          <Property Name="BayiAd" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="BayiYetkilisi" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="BayiAdres" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="BayiTelefon" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="BayiCiro" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+        </EntityType>
+        <Association Name="AraclarBayiler">
+          <End Type="AracKiralama1.Araclar" Role="Araclar" Multiplicity="1" />
+          <End Type="AracKiralama1.Bayiler" Role="Bayiler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Araclar">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bayiler">
+              <PropertyRef Name="AraclarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userName" Type="String" Nullable="false" />
+          <Property Name="UserPs" Type="String" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="AracKiralama1StoreContainer" CdmEntityContainer="AracKiralama1Container">
+    <EntitySetMapping Name="Musteriler1">
+      <EntityTypeMapping TypeName="IsTypeOf(AracKiralama1.Musteriler)">
+        <MappingFragment StoreEntitySet="Musteriler1">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MusteriAdSoyad" ColumnName="MusteriAdSoyad" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="TcNo" ColumnName="TcNo" />
+          <ScalarProperty Name="EhliyetDurumu" ColumnName="EhliyetDurumu" />
+          <ScalarProperty Name="Adres" ColumnName="Adres" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Odemeler1">
+      <EntityTypeMapping TypeName="IsTypeOf(AracKiralama1.Odemeler)">
+        <MappingFragment StoreEntitySet="Odemeler1">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="MusterilerId" ColumnName="MusterilerId" />
+          <ScalarProperty Name="AraclarId" ColumnName="AraclarId" />
+          <ScalarProperty Name="OdemeTutar" ColumnName="OdemeTutar" />
+          <ScalarProperty Name="OdemeTarih" ColumnName="OdemeTarih" />
+          <ScalarProperty Name="VadeFarki" ColumnName="VadeFarki" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Araclar1">
+      <EntityTypeMapping TypeName="IsTypeOf(AracKiralama1.Araclar)">
+        <MappingFragment StoreEntitySet="Araclar1">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AracMarka" ColumnName="AracMarka" />
+          <ScalarProperty Name="AracModel" ColumnName="AracModel" />
+          <ScalarProperty Name="AracOzellik" ColumnName="AracOzellik" />
+          <ScalarProperty Name="AracBakımGunu" ColumnName="AracBakımGunu" />
+          <ScalarProperty Name="AracKm" ColumnName="AracKm" />
+          <ScalarProperty Name="Hgs" ColumnName="Hgs" />
+          <ScalarProperty Name="GunlukTutar" ColumnName="GunlukTutar" />
+          <ScalarProperty Name="AracKiraDurumu" ColumnName="AracKiraDurumu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bayiler1">
+      <EntityTypeMapping TypeName="IsTypeOf(AracKiralama1.Bayiler)">
+        <MappingFragment StoreEntitySet="Bayiler1">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="AraclarId" ColumnName="AraclarId" />
+          <ScalarProperty Name="BayiAd" ColumnName="BayiAd" />
+          <ScalarProperty Name="BayiYetkilisi" ColumnName="BayiYetkilisi" />
+          <ScalarProperty Name="BayiAdres" ColumnName="BayiAdres" />
+          <ScalarProperty Name="BayiTelefon" ColumnName="BayiTelefon" />
+          <ScalarProperty Name="BayiCiro" ColumnName="BayiCiro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users1">
+      <EntityTypeMapping TypeName="IsTypeOf(AracKiralama1.Users)">
+        <MappingFragment StoreEntitySet="Users1">
+          <ScalarProperty Name="userID" ColumnName="userID" />
+          <ScalarProperty Name="userName" ColumnName="userName" />
+          <ScalarProperty Name="UserPs" ColumnName="UserPs" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
